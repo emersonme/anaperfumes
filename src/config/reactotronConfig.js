@@ -5,7 +5,7 @@ if (__DEV__) {
   const tron = Reactotron.setAsyncStorageHandler(AsyncStorage)
     .configure({
       name: 'React Native Demo',
-      host: '192.168.25.5',
+      host: '192.168.25.7',
     })
     .useReactNative({
       asyncStorage: true,

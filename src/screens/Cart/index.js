@@ -45,8 +45,8 @@ export default function index({navigation}) {
     const lancamento = {
       MARCAID: marca.ID,
       DESCRICAO: produto,
-      TOTAL: valor,
-      QUANTIDADE: quantidade,
+      TOTAL: parseFloat(valor),
+      QUANTIDADE: parseInt(quantidade, 10),
       DATA: moment().format('YYYY-MM-DD HH:MM:SS'),
     }
     try {
@@ -59,6 +59,11 @@ export default function index({navigation}) {
     } finally {
       setLoading(false)
     }
+  }
+
+  function handleAmountChange(value) {
+    const newValue = value.replace(',', '.')
+    setValor(newValue)
   }
 
   return (
@@ -80,13 +85,13 @@ export default function index({navigation}) {
               placeholder={'Quantidade'}
               value={quantidade.toString()}
               keyboardType="number-pad"
-              onChangeText={value => setQuantidade(parseInt(value))}
+              onChangeText={value => setQuantidade(value)}
             />
             <Input
               placeholder={'Total (R$)'}
               value={valor}
               keyboardType="number-pad"
-              onChangeText={value => setValor(value)}
+              onChangeText={handleAmountChange}
             />
             <Picker
               placeholder={'Marca'}
